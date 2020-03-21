@@ -1,14 +1,8 @@
-sudo docker pull mysql/mysql-server:5.5
-sudo docker run --name=mysql1 -p 3306:3306 -d mysql/mysql-server:5.5
-sudo docker logs mysql1 2>&1 | grep GENERATED(Esto nos saca la clave del admin.)
+sudo docker pull mysql
+sudo docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 -d mysql
 
-sudo docker exec -it mysql1 mysql -uroot -p(Nos va a pedir la clave de admin)
+sudo docker exec -it mysql1 mysql -uroot -p(La clave de admin es my-secret-pw )
 
-Dentro del servidor introducimos:
-update mysql.user set host = '%' where user='root';
-exit
-
-sudo docker restart mysql1
 
 
 Nos vamos al workbeanch y creamos una conexión con:
