@@ -1,0 +1,23 @@
+sudo docker pull mysql/mysql-server:5.5
+sudo docker run --name=mysql1 -p 3306:3306 -d mysql/mysql-server:5.5
+sudo docker logs mysql1 2>&1 | grep GENERATED(Esto nos saca la clave del admin.)
+
+sudo docker exec -it mysql1 mysql -uroot -p(Nos va a pedir la clave de admin)
+
+Dentro del servidor introducimos:
+update mysql.user set host = '%' where user='root';
+exit
+
+sudo docker restart mysql1
+
+
+Nos vamos al workbeanch y creamos una conexión con:
+hostname: 0.0.0.0 port: 3306
+username: root
+password: La que hemos utilizado antes
+
+Cuando queremos apagar el servidor, y así guarda la configuracíón:
+sudo docker stop mysql1
+
+Y cuando queremos encenderlo:
+sudo docker start mysql1
