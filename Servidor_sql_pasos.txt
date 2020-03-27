@@ -1,17 +1,34 @@
 sudo docker pull mysql
-sudo docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 -d mysql
+sudo docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 -p 22:22 -d mysql
 
-sudo docker exec -it mysql1 mysql -uroot -p(La clave de admin es my-secret-pw )
+Entramos en el servidor mysql
+	sudo docker exec -it mysql1 mysql -uroot -p(La clave de admin es my-secret-pw )
 
-
-
+Instalamos el servidor ssh en nuestro servidor mysql para poder tener control complete desde el workbeanch:
+	\! apt install -y openssh-server
+	\! echo PermitRootLogin yes >> /etc/ssh/sshd_config
+	
 Nos vamos al workbeanch y creamos una conexión con:
-hostname: 0.0.0.0 port: 3306
-username: root
-password: La que hemos utilizado antes
+	
+Pestaña connection:
+	Connection Method: Standard TCP/IP over ssh
+	ssh hostname: 0.0.0.0:22
+	ssh username root
+	pass: my-secret-pw	
+	hostname: 0.0.0.0 port: 3306
+	username: root
+	pass: my-secret-pw
+Pestaña Remote Management:
+	Opcion SSH login base management
+	hostname: 0.0.0.0:22
+	username:root
+	pass: my-secret-pw
+
 
 Cuando queremos apagar el servidor, y así guarda la configuracíón:
-sudo docker stop mysql1
+	sudo docker stop mysql1
 
 Y cuando queremos encenderlo:
-sudo docker start mysql1
+	sudo docker start mysql1
+
+
