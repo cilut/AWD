@@ -15,6 +15,7 @@ git clone https://github.com/cilut/AWD.git
 
 
 sudo docker build -t mysql_mod:1.0 mysql1/8.0/. 
+
 sudo docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -p 22:22 -d mysql_mod:1.0
 
 
