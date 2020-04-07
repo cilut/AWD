@@ -1,0 +1,23 @@
+He seguido este mismo tutorial pero en el caso de los ficehros :
+my.conf, estan en la carpeta /etc/mysql/ y no como en el tutorial que estan en el /etc/.
+
+Para obtener la clave de la instancia mirar mas abajo
+		https://sharadchhetri.com/2013/12/02/create-multiple-mysql-instance-centos-6-4-red-hat-6-4/
+		
+
+Hoe to the temporary pass: 
+		https://stackoverflow.com/questions/33467337/reset-mysql-root-password-using-alter-user-statement-after-install-on-mac
+Todo esta en el tutorial.
+		
+		"grep root@localhost /var/log/mysqld.log"
+		luego se entra en el server y se cambia con:
+
+		SET PASSWORD = PASSWORD('xxxxx');
+
+
+
+Encender instancia:
+	sudo mysqld_safe --defaults-file=/etc/mysql/my2.cnf 
+
+Apagar instancia:
+	sudo mysqladmin -S /var/lib/mysql/mysql2.sock shutdown -p
